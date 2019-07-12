@@ -1,22 +1,9 @@
 #include<iostream>
 #include"header.h"
+#include"fun_opt_disp_take_act.cpp"
 using namespace std;
 
 int main()
 {
-    int choice;
-    while(1)
-    {
-        choice=options_display();
-
-        switch(choice)
-        {
-            case 1:
-                register_new_user();
-                break;
-            case 2:
-                login_existing_user();
-                break;
-        }
-    }
+    user_choice();
 }
