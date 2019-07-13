@@ -1,25 +1,23 @@
-<<<<<<< HEAD
+//<<<<<<< HEAD
+#pragma once
+
 #include<iostream>
 #include<istream>
 #include<fstream>
 #include<stdlib.h>
 #include<string.h>
+using namespace std;
+
 #define IT_FILE "/home/rachita/Documents/project_documents/it_details.txt"
 #define FINANCE_FILE "/home/rachita/Documents/project_documents/finance_details.txt"
 
 #define CHOICE_1 1
 #define CHOICE_2 2
 #define CHOICE_3 3
-
-
-=======
-#pragma once
-
-using namespace std;
-
-#define choice_1 1
-#define choice_2 2
-#define choice_3 3
+#define CHOICE_4 4
+#define CHOICE_5 5
+#define CHOICE_6 6
+#define CHOICE_7 7
 
 class emp_id
 {
@@ -47,16 +45,17 @@ class emp_department
 
 class login:public emp_username,public emp_password,public emp_department
 {
-    
+    public:
 };
 
 class regstr:public emp_username,public emp_password,public emp_department
 {
-    
+    public:
 };
 
-   
-void login_existing_user();
-void register_new_user();
 int options_display();
->>>>>>> 08b3691b8f84d08b2d599853cf5e6cd92b699819
+void exit();
+void display_employee_details();
+void modify_employee_details();
+void register_new_user();
+void login_existing_user();
