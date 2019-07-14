@@ -1,4 +1,4 @@
-//<<<<<<< HEAD
+// to include header only once
 #pragma once
 
 #include<iostream>
@@ -6,10 +6,8 @@
 #include<fstream>
 #include<stdlib.h>
 #include<string.h>
-using namespace std;
 
-#define IT_FILE "/home/rachita/Documents/project_documents/it_details.txt"
-#define FINANCE_FILE "/home/rachita/Documents/project_documents/finance_details.txt"
+using namespace std;
 
 #define CHOICE_1 1
 #define CHOICE_2 2
@@ -19,43 +17,50 @@ using namespace std;
 #define CHOICE_6 6
 #define CHOICE_7 7
 
-class emp_id
+#define append  ios::app
+#define output  ios::ate  
+#define read    ios::in
+#define write   ios::out
+#define trunc   ios::trunc
+
+#define mode_append 1
+#define mode_output 2
+#define mode_read   3
+#define mode_write  4
+#define mode_trunc  5
+
+// basic class for performing employee operations
+class Employee
 {
     public:
         int id;
-};
-
-class emp_username
-{
-    public:
         string username;
-};
-
-class emp_password
-{
-    public:
         string password;
-};
-
-class emp_department
-{
-    public:
         string department;
+        string email;
+    
+    public:
+        void login_existing_user(Employee *);
+        void display_employee_details(Employee *);
+        void modify_employee_details(Employee *);
+        void register_new_user(Employee *);
 };
 
-class login:public emp_username,public emp_password,public emp_department
+// class for performing file operations
+class File_opr:public Employee
 {
     public:
-};
+        const char* filename;
+        int is_found;
 
-class regstr:public emp_username,public emp_password,public emp_department
-{
     public:
+        int file_open(Employee*,const char *,int);
+        int read_complete_data();
+        int create_linked_list();
+        int write_to_file(Employee*,const char*);
 };
 
+// function prototypes
 int options_display();
 void exit();
-void display_employee_details();
-void modify_employee_details();
-void register_new_user();
-void login_existing_user();
+void read_data_from_user(Employee *);

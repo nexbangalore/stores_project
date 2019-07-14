@@ -60,17 +60,13 @@ void user_choice()
     return ;
 }
 
-void Employee::display_employee_details(Employee* dips_ptr){
+void Employee::display_employee_details(Employee* disp_ptr){
     
     system("clear");
     cout<<"welcome to display\n"<<flush;
     
-    cout<<"\n"<<"enter your username:"<<endl;
-    cin>>(*dips_ptr).username;
-    
-    cout<<"\n"<<"enter your password:"<<endl;
-    cin>>(*dips_ptr).password;
-    
+    read_data_from_user(disp_ptr);
+
     return;
 }
 
@@ -79,12 +75,7 @@ void Employee::modify_employee_details(Employee* modify_ptr){
     system("clear");
     cout<<"welcome to modify\n"<<flush;
     
-    cout<<"\n"<<"enter your username:"<<endl;
-    cin>>(*modify_ptr).username;
-    
-    cout<<"\n"<<"enter your password:"<<endl;
-    cin>>(*modify_ptr).password;
-    
+    read_data_from_user(modify_ptr);
     return;
 }
 
@@ -93,30 +84,45 @@ void Employee::login_existing_user(Employee* login_ptr){
     system("clear");
     cout<<"-------welcome to login page-------"<<"\n"<<flush;
 
-    cout<<"-------enter the credentials-------"<<"\n";
-
-    cout<<"\n"<<"enter your username:"<<endl;
-    cin>>(*login_ptr).username;
-
-    cout<<"\n"<<"enter your password:"<<endl;
-    cin>>(*login_ptr).password;
-
+    read_data_from_user(login_ptr);
     //user_choice();
 }
 
-void Employee::register_new_user(Employee* regt_ptr)
-{
+void Employee::register_new_user(Employee* regt_ptr){
+
+    // object for performing file operations
+    File_opr file_op_obj;
+
+    // filename
+    file_op_obj.filename="database.txt";
+
     system("clear");
     cout<<"-------welcome to registration page------"<<"\n"<<flush;
 
-    cout<<"-------enter the credentials:-------"<<"\n";
-    cout<<"\nenter your username:"<<endl;
-    cin>>(*regt_ptr).username;
+    // for reading credentials
+    read_data_from_user(regt_ptr);
 
-    cout<<"\nenter your password:"<<endl;
-    cin>>(*regt_ptr).password;
+    // file opening member function for file operations
+    file_op_obj.file_open(regt_ptr,file_op_obj.filename,0);  
 
     //user_choice();
 }
 
+void read_data_from_user(Employee* user_input){
 
+    cout<<"-------enter the credentials-------"<<"\n";
+
+    cout<<"\n"<<"enter your username:"<<endl;
+    cin>>(*user_input).username;
+
+    cout<<"\n"<<"enter your password:"<<endl;
+    cin>>(*user_input).password;
+
+    cout<<"\n"<<"enter your email id:"<<endl;
+    cin>>(*user_input).email;
+
+    cout<<"\n"<<"enter your department:"<<endl;
+    cin>>(*user_input).department;
+ 
+    return;
+}
