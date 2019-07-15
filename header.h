@@ -62,7 +62,7 @@ class Node
 
 // class for performing file operations
 // file_opr is inheriting class Employee
-class File_opr:public Employee public Node
+class File_opr:public Employee 
 {
     public:
         const char* filename;

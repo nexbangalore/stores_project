@@ -88,17 +88,17 @@ int File_opr::read_complete_data(const char *filename,int mode)
 Node* File_opr::create_node(char* str)
 {
     Node* new_node=new Node;
-    new_node.email=str;
-    new_node.next=NULL;
+    new_node->email=str;
+    new_node->next=NULL;
 
     return new_node;
 }
 
-Node* File_opr::create_list(Node **head,char *string)
+Node* File_opr::create_list(Node **head,char *str)
 {
     File_opr object;
     Node* pointer=(*head);
-    Node* new_node=object.create_node(string);
+    Node* new_node=object.create_node(str);
     if((*head)==NULL)
     {
         (*head)=new_node;
