@@ -3,6 +3,5 @@
 
 int main()
 {
-    cout<<"**************************** Employee Project ****************************"<<"\n"<<flush;
     user_choice();
 }

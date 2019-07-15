@@ -20,6 +20,7 @@ void user_choice()
     int choice=0;
     Employee operation;
     system("clear");
+    cout<<"--------------Employee Project-----------\n"<<flush;
 
     choice=options_display();
 
@@ -102,12 +103,10 @@ void Employee::register_new_user(Employee* regt_ptr){
     // for reading credentials
     read_data_from_user(regt_ptr);
 
-    // file opening member function for file operations
-    file_op_obj.file_open(regt_ptr,file_op_obj.filename,0);  
-
-    //user_choice();
+    file_op_obj.write_to_file(regt_ptr,file_op_obj.filename,4); 
 }
 
+// generic read user data function
 void read_data_from_user(Employee* user_input){
 
     cout<<"-------enter the credentials-------"<<"\n";

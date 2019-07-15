@@ -9,6 +9,12 @@
 
 using namespace std;
 
+#define email_sym_l '<'
+#define email_sym_r '>'
+#define data_sym_l  '{'
+#define data_sym_r  '}'
+#define separator   ','
+
 #define CHOICE_1 1
 #define CHOICE_2 2
 #define CHOICE_3 3
@@ -47,6 +53,7 @@ class Employee
 };
 
 // class for performing file operations
+// file_opr is inheriting class Employee
 class File_opr:public Employee
 {
     public:
@@ -54,10 +61,10 @@ class File_opr:public Employee
         int is_found;
 
     public:
-        int file_open(Employee*,const char *,int);
+        int file_open(Employee*,const char *,int,fstream*);
         int read_complete_data();
         int create_linked_list();
-        int write_to_file(Employee*,const char*);
+        int write_to_file(Employee*,const char*,int);
 };
 
 // function prototypes
