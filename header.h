@@ -9,11 +9,11 @@
 
 using namespace std;
 
-#define email_sym_l '<'
-#define email_sym_r '>'
-#define data_sym_l  '{'
-#define data_sym_r  '}'
-#define separator   ','
+#define EMAIL_SYM_OPEN  '<'
+#define EMAIL_SYM_CLOSE '>'
+#define DATA_SYM_OPEN   '{'
+#define DATA_SYM_CLOSE  '}'
+#define SEPARATOR       ','
 
 #define CHOICE_1 1
 #define CHOICE_2 2
@@ -23,17 +23,17 @@ using namespace std;
 #define CHOICE_6 6
 #define CHOICE_7 7
 
-#define append  ios::app
-#define output  ios::ate  
-#define read    ios::in
-#define write   ios::out
-#define trunc   ios::trunc
+#define APPEND  ios::app
+#define OUTPUT  ios::ate  
+#define READ    ios::in
+#define WRITE   ios::out
+#define TRUNC   ios::trunc
 
-#define mode_append 1
-#define mode_output 2
-#define mode_read   3
-#define mode_write  4
-#define mode_trunc  5
+#define MODE_APPEND 1
+#define MODE_OUTPUT 2
+#define MODE_READ   3
+#define MODE_WRITE  4
+#define MODE_TRUNC  5
 
 // basic class for performing employee operations
 class Employee
@@ -44,7 +44,7 @@ class Employee
         string password;
         string department;
         string email;
-    
+
     public:
         void login_existing_user(Employee *);
         void display_employee_details(Employee *);
@@ -65,6 +65,16 @@ class File_opr:public Employee
         int read_complete_data();
         int create_linked_list();
         int write_to_file(Employee*,const char*,int);
+};
+
+class Node
+{
+    string email;
+    string username;
+    string password;
+    string department;
+
+    Node* next=NULL;
 };
 
 // function prototypes

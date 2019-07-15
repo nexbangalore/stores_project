@@ -3,25 +3,25 @@
 int File_opr::file_open(Employee* member,const char* filename,int mode,fstream* my_file)
 {
     // passing the file opening modes
-    if(mode == mode_append)
+    if(mode == MODE_APPEND)
     {
-        (*my_file).open(filename,output | write | read);
+        (*my_file).open(filename,OUTPUT | WRITE | READ);
     }
-    else if(mode == mode_output)
+    else if(mode == MODE_OUTPUT)
     {
-        (*my_file).open(filename,output);
+        (*my_file).open(filename,OUTPUT);
     }
-    else if(mode == mode_read)
+    else if(mode == MODE_READ)
     {
-        (*my_file).open(filename,read);
+        (*my_file).open(filename,READ);
     }
-    else if(mode == mode_write)
+    else if(mode == MODE_WRITE)
     {
-        (*my_file).open(filename,write);
+        (*my_file).open(filename,WRITE);
     }
-    else if(mode == mode_trunc)
+    else if(mode == MODE_TRUNC)
     {
-        (*my_file).open(filename,trunc);
+        (*my_file).open(filename,TRUNC);
     }
 
     return 0;
@@ -29,28 +29,32 @@ int File_opr::file_open(Employee* member,const char* filename,int mode,fstream* 
 
 int File_opr::write_to_file(Employee* Employee_data,const char* filename,int mode)
 {
+    // using fstream for both input and output
     fstream my_file;
     File_opr write_obj;
 
     // opening the file
-    write_obj.file_open(Employee_data,filename,4,&my_file);
+    write_obj.file_open(Employee_data,filename,mode,&my_file);
 
     // writing employee email id as the first parameter
-    my_file<<email_sym_l;
+    // enclosing <emailid>
+    my_file<<EMAIL_SYM_OPEN;
     my_file<<(*Employee_data).email;
-    my_file<<email_sym_r;
+    my_file<<EMAIL_SYM_CLOSE;
 
     // writing the other parts of data 
-    my_file<<data_sym_l;
+    // {data1,data2}
+    my_file<<DATA_SYM_OPEN;
     my_file<<(*Employee_data).username;
-    my_file<<separator;
+    my_file<<SEPARATOR;
     my_file<<(*Employee_data).password;
-    my_file<<separator;
+    my_file<<SEPARATOR;
     my_file<<(*Employee_data).email;
-    my_file<<separator;
+    my_file<<SEPARATOR;
     my_file<<(*Employee_data).department;
-    my_file<<data_sym_r<<endl;
+    my_file<<DATA_SYM_CLOSE<<endl;
 
+    // closing the file
     my_file.close();
 
     return 3;
