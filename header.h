@@ -6,6 +6,7 @@
 #include<fstream>
 #include<stdlib.h>
 #include<string.h>
+#include<cstring>
 
 using namespace std;
 
@@ -52,9 +53,16 @@ class Employee
         void register_new_user(Employee *);
 };
 
+class Node
+{
+    public:
+       char* email;
+       Node* next;
+};
+
 // class for performing file operations
 // file_opr is inheriting class Employee
-class File_opr:public Employee
+class File_opr:public Employee public Node
 {
     public:
         const char* filename;
@@ -62,19 +70,11 @@ class File_opr:public Employee
 
     public:
         int file_open(Employee*,const char *,int,fstream*);
-        int read_complete_data();
+        int read_complete_data(const char*,int);
         int create_linked_list();
         int write_to_file(Employee*,const char*,int);
-};
-
-class Node
-{
-    string email;
-    string username;
-    string password;
-    string department;
-
-    Node* next=NULL;
+        Node* create_node(char*);
+        Node* create_list(Node **,char *);
 };
 
 // function prototypes

@@ -86,7 +86,6 @@ void Employee::login_existing_user(Employee* login_ptr){
     cout<<"-------welcome to login page-------"<<"\n"<<flush;
 
     read_data_from_user(login_ptr);
-    //user_choice();
 }
 
 void Employee::register_new_user(Employee* regt_ptr){
@@ -103,7 +102,7 @@ void Employee::register_new_user(Employee* regt_ptr){
     // for reading credentials
     read_data_from_user(regt_ptr);
 
-    file_op_obj.write_to_file(regt_ptr,file_op_obj.filename,4); 
+    file_op_obj.write_to_file(regt_ptr,file_op_obj.filename,MODE_APPEND); 
 }
 
 // generic read user data function
