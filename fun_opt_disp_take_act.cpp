@@ -56,7 +56,7 @@ void user_choice()
             cout<<"\n Please enter a correct input \n";
             //user_choice();
     }
-    user_choice();
+    //user_choice();
 
     return ;
 }
@@ -67,6 +67,7 @@ void Employee::display_employee_details(Employee* disp_ptr){
     cout<<"welcome to display\n"<<flush;
     
     read_data_from_user(disp_ptr);
+    //user_choice();
 
     return;
 }
@@ -77,6 +78,7 @@ void Employee::modify_employee_details(Employee* modify_ptr){
     cout<<"welcome to modify\n"<<flush;
     
     read_data_from_user(modify_ptr);
+    //user_choice();
     return;
 }
 
@@ -86,6 +88,7 @@ void Employee::login_existing_user(Employee* login_ptr){
     cout<<"-------welcome to login page-------"<<"\n"<<flush;
 
     read_data_from_user(login_ptr);
+    //user_choice();
 }
 
 void Employee::register_new_user(Employee* regt_ptr){

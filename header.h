@@ -24,11 +24,11 @@ using namespace std;
 #define CHOICE_6 6
 #define CHOICE_7 7
 
-#define APPEND  ios::app
-#define OUTPUT  ios::ate  
-#define READ    ios::in
-#define WRITE   ios::out
-#define TRUNC   ios::trunc
+#define APPEND  std::fstream::app
+#define OUTPUT  std::fstream::ate  
+#define READ    std::fstream::in
+#define WRITE   std::fstream::out
+#define TRUNC   std::fstream::trunc
 
 #define MODE_APPEND 1
 #define MODE_OUTPUT 2
@@ -75,6 +75,7 @@ class File_opr:public Employee
         int write_to_file(Employee*,const char*,int);
         Node* create_node(char*);
         Node* create_list(Node **,char *);
+        void display_data_linked_list(Node **);
 };
 
 // function prototypes
