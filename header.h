@@ -55,7 +55,7 @@ class Employee
 class Node:public Employee
 {
     public:
-       string email;
+//       string email;
        Node* next;
 };
 
