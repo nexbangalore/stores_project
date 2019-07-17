@@ -1,3 +1,0 @@
-<rachita@abc.com>{Rachita,FINANCE,rachitapatro,rachita@abc.com,1234}
-<andy@xyz.com>{Andy,FINANCE,rachitapatro,andy@xyz.com,5678}
-
