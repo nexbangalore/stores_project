@@ -30,7 +30,7 @@ using namespace std;
 #define WRITE   std::fstream::out
 #define TRUNC   std::fstream::trunc
 
-#define MODE_APPEND 1
+#define MODE_APPEND 1 
 #define MODE_OUTPUT 2
 #define MODE_READ   3
 #define MODE_WRITE  4
@@ -46,18 +46,24 @@ class Employee
         string department;
         string email;
 
-    public:
         void login_existing_user(Employee *);
         void display_employee_details(Employee *);
         void modify_employee_details(Employee *);
         void register_new_user(Employee *);
 };
 
-class Node
+class Node:public Employee
 {
     public:
-       char* email;
+       string email;
        Node* next;
+};
+
+class linked_list:public Node
+{
+    public:
+        Node* create_list(Node **,char *);
+        void display_data_linked_list(Node **);
 };
 
 // class for performing file operations
@@ -68,14 +74,9 @@ class File_opr:public Employee
         const char* filename;
         int is_found;
 
-    public:
         int file_open(Employee*,const char *,int,fstream*);
         int read_complete_data(const char*,int);
-        int create_linked_list();
         int write_to_file(Employee*,const char*,int);
-        Node* create_node(char*);
-        Node* create_list(Node **,char *);
-        void display_data_linked_list(Node **);
 };
 
 // function prototypes

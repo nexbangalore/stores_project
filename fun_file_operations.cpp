@@ -3,11 +3,11 @@
 int File_opr::file_open(Employee* member,const char* filename,int mode,fstream* my_file)
 {
     // passing the file opening modes
-    if(mode == MODE_APPEND)
+    if(mode == MODE_APPEND)            // if(1 == 1)
     {
         (*my_file).open(filename,OUTPUT | APPEND | READ);
     }
-    else if(mode == MODE_OUTPUT)
+    else if(mode == MODE_OUTPUT)       // if(2 == 2)
     {
         (*my_file).open(filename,OUTPUT);
     }
@@ -27,14 +27,14 @@ int File_opr::file_open(Employee* member,const char* filename,int mode,fstream* 
     return 0;
 }
 
-int File_opr::write_to_file(Employee* Employee_data,const char* filename,int mode)
+int File_opr::write_to_file(Employee* Employee_data,const char* filename,int MODE)
 {
     // using fstream for both input and output
     fstream my_file;
-    File_opr write_obj;
+    File_opr write;
 
-    // opening the file
-    write_obj.file_open(Employee_data,filename,mode,&my_file);
+    //user defined opening the file
+    write.file_open(Employee_data,filename,MODE,&my_file);
 
     if(my_file.is_open())
     {
@@ -63,69 +63,60 @@ int File_opr::write_to_file(Employee* Employee_data,const char* filename,int mod
     // closing the file
     my_file.close();
 
-    write_obj.read_complete_data(filename,MODE_READ);
-
     return 3;
 }
 
 int File_opr::read_complete_data(const char *filename,int MODE)
 {
     fstream my_file;
-    File_opr read_obj;
+    
+    File_opr read;
+    linked_list link_obj;
     string line;
-    char *token=NULL;
+
+    char* token=NULL;
     char delim='>';
-    Node* head;
-    head=NULL;
+    
+    Node* head=NULL;
 
-    read_obj.file_open(NULL,filename,MODE,&my_file);
+    // user defined
+    read.file_open(NULL,filename,MODE,&my_file);
+                                                           
+    //system("clear");
 
-    system("clear");
-
+    // system defined
     if(my_file.is_open())
     {
         while(!(my_file.eof()))
         {
             while(getline(my_file,line))
             {
-                token=strtok(&line[0],&delim);
-                //cout<<token;
-                read_obj.create_list(&head,token);
+                token=strtok(&line[0]+1,&delim);
+                link_obj.create_list(&head,token);
             }
         }
     }
     my_file.close();
-    //read_obj.display_data_linked_list(&head);
+    link_obj.display_data_linked_list(&head);
+    
     return 1;
 }
 
-Node* File_opr::create_node(char* str)
+Node* linked_list::create_list(Node **head,char *str)
 {
-    Node* new_node;
-    new_node=new Node;
-    
-    new_node->email=str;
-
-    new_node->next=NULL;
-
-    return new_node;
-}
-
-Node* File_opr::create_list(Node **head,char *str)
-{
-    File_opr object;
-
     // initialising the pointer with head address value
     Node* pointer=(*head);
 
     // storing the address of new node
-    Node* new_node=object.create_node(str);
+    Node* new_node=new (Node);
+    new_node->email=str;
+   // cout<<new_node->email<<endl;
+    new_node->next=NULL;
 
     if((*head)==NULL)
     {
         // if there is only a base node
         (*head)=new_node;
-        cout<<(*head)->email<<endl;
     }
     else
     {
@@ -135,24 +126,19 @@ Node* File_opr::create_list(Node **head,char *str)
             // if the pointer has reached its end
             pointer=pointer->next;
         }
-        // attaching the new node at the last
         pointer->next=new_node;
-        cout<<pointer->next->email<<endl;
-        object.display_data_linked_list(head);
     }
 
     return (*head);
 }
 
-void File_opr::display_data_linked_list(Node** head)
+void linked_list::display_data_linked_list(Node** head)
 {
-    int counter=0;
-    cout<<"displaying the data in linked list\n";
-    Node* pointer=*head;
+    cout<<"printing the list"<<endl;
+    Node* pointer=(*head);
     while(pointer != NULL)
     {
-        ++counter;
-        cout<<pointer->email<<flush;
+        std::cout<<pointer->email<<endl;
         pointer=pointer->next;
     }
 }
