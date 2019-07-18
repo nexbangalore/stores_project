@@ -146,12 +146,12 @@ void linked_list::display_data_linked_list(Node** head)
     Node* pointer=(*head);
     while(pointer != NULL)
     {
-        cout<<"----------------------------";
+        cout<<"----------------------------"<<endl;
         cout<<pointer->username<<endl;
         cout<<pointer->password<<endl;
         cout<<pointer->email<<endl;
         cout<<pointer->department<<endl;
-        cout<<"----------------------------";
+        cout<<"----------------------------"<<endl;
         
         pointer=pointer->next;
     }

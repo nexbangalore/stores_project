@@ -94,9 +94,22 @@ void Employee::login_existing_user(Employee* login_ptr){
     cout<<"-------welcome to login page-------"<<"\n"<<flush;
 
     login_obj.input_login_details(login_ptr);
+    
+    head=file_op_obj.read_complete_data("database.txt",MODE_READ);
+    
+    result_of_data_found=ver_obj.parse_data_link_list(login_ptr,head);
+    
+    if(result_of_data_found == MATCH_FOUND)
+    {
+       cout<<"you are logged in"<<endl;
+    }
+    
+    if(result_of_data_found == MATCH_NOT_FOUND)
+    {
+       cout<<"credentials are not present you cannot log in"<<endl;
+       cout<<"please register yourself first"<<endl;
+    }
 
-    read_data_from_user(login_ptr);
-    //user_choice();
 }
 
 void Employee::register_new_user(Employee* regt_ptr){
@@ -129,6 +142,8 @@ void Employee::register_new_user(Employee* regt_ptr){
        cout<<"data does not exists added to database"<<endl;
        file_op_obj.write_to_file(regt_ptr,file_op_obj.filename,MODE_APPEND); 
     }
+
+    user_choice();
 
     return;
 }
