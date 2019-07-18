@@ -38,12 +38,6 @@ int File_opr::write_to_file(Employee* Employee_data,const char* filename,int MOD
 
     if(my_file.is_open())
     {
-        // enclosing <emailid>
-        my_file<<EMAIL_SYM_OPEN;
-        my_file<<(*Employee_data).email;
-        my_file<<EMAIL_SYM_CLOSE;
-
-        // writing the other parts of data 
         // {data1,data2}
         my_file<<DATA_SYM_OPEN;
         my_file<<(*Employee_data).username;
@@ -70,12 +64,12 @@ Node* File_opr::read_complete_data(const char *filename,int MODE)
 {
     fstream my_file;
     
+    int index=0;
     File_opr read;
     linked_list link_obj;
     string line;
-
-    char* token=NULL;
-    char delim='>';
+    char* brk_str[4];
+    char delim=',';
     
     Node* head=NULL;
 
@@ -91,8 +85,14 @@ Node* File_opr::read_complete_data(const char *filename,int MODE)
         {
             while(getline(my_file,line))
             {
-                token=strtok(&line[1],&delim);
-                link_obj.create_list(&head,token);
+                index=0;
+                brk_str[index]=strtok(&line[1],&delim);
+                while(brk_str[index] != NULL)
+                {
+                    index++;
+                    brk_str[index]=strtok(NULL,&delim);
+                }
+                link_obj.create_list(&head,brk_str[0],brk_str[1],brk_str[2],brk_str[3]);
             }
         }
     }
@@ -107,14 +107,17 @@ Node* File_opr::read_complete_data(const char *filename,int MODE)
     return head;
 }
 
-Node* linked_list::create_list(Node **head,char *str)
+Node* linked_list::create_list(Node **head,char *str_1,char *str_2,char* str_3,char* str_4)
 {
     // initialising the pointer with head address value
     Node* pointer=(*head);
 
     // storing the address of new node
     Node* new_node=new (Node);
-    new_node->email=str;
+    new_node->username=str_1;
+    new_node->password=str_2;
+    new_node->email=str_3;
+    new_node->department=str_4;
     new_node->next=NULL;
 
     if((*head)==NULL)
@@ -143,7 +146,13 @@ void linked_list::display_data_linked_list(Node** head)
     Node* pointer=(*head);
     while(pointer != NULL)
     {
-        std::cout<<pointer->email<<endl;
+        cout<<"----------------------------";
+        cout<<pointer->username<<endl;
+        cout<<pointer->password<<endl;
+        cout<<pointer->email<<endl;
+        cout<<pointer->department<<endl;
+        cout<<"----------------------------";
+        
         pointer=pointer->next;
     }
 }

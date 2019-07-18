@@ -56,19 +56,19 @@ class Employee
         void display_employee_details(Employee *);
         void modify_employee_details(Employee *);
         void register_new_user(Employee *);
+        void input_login_details(Employee *);
 };
 
 class Node:public Employee
 {
     public:
-     //  char* email;
        Node* next;
 };
 
 class linked_list:public Node
 {
     public:
-        Node* create_list(Node **,char *);
+        Node* create_list(Node **,char *,char*,char*,char*);
         void display_data_linked_list(Node **);
 };
 

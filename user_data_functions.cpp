@@ -3,10 +3,14 @@
 int Emp_cred_ver::user_is_present(Employee* member,Node* node)
 {
     Emp_cred_ver object;
+    int result_cmp_email,result_cmp_usrname,result_cmp_pswd;
 
     // calling string compare function_strcmp
-    int result_of_comp=object.result_of_strcmp(&(((*member).email)[0]),&((node->email)[0]));
-    if(result_of_comp == MATCH_FOUND)
+    result_cmp_email=object.result_of_strcmp(&(((*member).email)[0]),&((node->email)[0]));
+    result_cmp_usrname=object.result_of_strcmp(&(((*member).username)[0]),&((node->username)[0]));
+    result_cmp_pswd=object.result_of_strcmp(&(((*member).password)[0]),&((node->password)[0]));
+
+    if((result_cmp_email== MATCH_FOUND) && (result_cmp_usrname==MATCH_FOUND) && (result_cmp_pswd==MATCH_FOUND))
     {
         // to parse_data_link_list()
         return MATCH_FOUND;
@@ -18,11 +22,11 @@ int Emp_cred_ver::user_is_present(Employee* member,Node* node)
 }
 
 // function_strcmp
-int Emp_cred_ver::result_of_strcmp(char *email_from_user,char *email_from_database)
+int Emp_cred_ver::result_of_strcmp(char *member_from_user,char *member_from_database)
 {
     int result;
 
-    result=strcmp(email_from_user,email_from_database);
+    result=strcmp(member_from_user,member_from_database);
     if(result==0)
     {
         // to user_is_present function
@@ -67,4 +71,7 @@ int Emp_cred_ver::parse_data_link_list(Employee* member,Node* head)
     // to fun_opt_function.cpp function()
     return MATCH_NOT_FOUND;
 }
+
+
+
 

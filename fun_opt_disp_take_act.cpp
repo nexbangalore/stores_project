@@ -63,7 +63,7 @@ void user_choice()
 
 void Employee::display_employee_details(Employee* disp_ptr){
     
-    system("clear");
+    //system("clear");
     cout<<"welcome to display\n"<<flush;
     
     read_data_from_user(disp_ptr);
@@ -74,7 +74,7 @@ void Employee::display_employee_details(Employee* disp_ptr){
 
 void Employee::modify_employee_details(Employee* modify_ptr){
     
-    system("clear");
+    //system("clear");
     cout<<"welcome to modify\n"<<flush;
     
     read_data_from_user(modify_ptr);
@@ -84,8 +84,16 @@ void Employee::modify_employee_details(Employee* modify_ptr){
 
 void Employee::login_existing_user(Employee* login_ptr){
 
-    system("clear");
+    //system("clear");
+    File_opr file_op_obj;
+    Node* head;
+    Emp_cred_ver ver_obj;
+    int result_of_data_found;
+    Employee login_obj;
+
     cout<<"-------welcome to login page-------"<<"\n"<<flush;
+
+    login_obj.input_login_details(login_ptr);
 
     read_data_from_user(login_ptr);
     //user_choice();
@@ -102,20 +110,12 @@ void Employee::register_new_user(Employee* regt_ptr){
     // filename
     file_op_obj.filename="database.txt";
 
-    //system("clear");
-    //cout<<"-------welcome to registration page------"<<"\n"<<flush;
-
     // for reading credentials
     read_data_from_user(regt_ptr);
 
     //fetching the head after reading all the data from database
     head=file_op_obj.read_complete_data(file_op_obj.filename,MODE_READ);
     
-    //if(head==NULL)
-    //{
-    //    cout<<"no data present in file to read"<<endl;
-    //}
-
     result_of_data_found=ver_obj.parse_data_link_list(regt_ptr,head);
 
     if(result_of_data_found == MATCH_FOUND)
@@ -152,3 +152,18 @@ void read_data_from_user(Employee* user_input){
  
     return;
 }
+
+void Employee::input_login_details(Employee* login_input)
+{
+    cout<<"-------enter the credentials to login-------"<<"\n";
+
+    cout<<"\n"<<"enter your username:"<<endl;
+    cin>>(*login_input).username;
+
+    cout<<"\n"<<"enter your password:"<<endl;
+    cin>>(*login_input).password;
+
+    cout<<"\n"<<"enter your email id:"<<endl;
+    cin>>(*login_input).email;
+}
+
