@@ -64,9 +64,15 @@ void user_choice()
 void Employee::display_employee_details(Employee* disp_ptr){
     
     //system("clear");
-    cout<<"welcome to display\n"<<flush;
+    File_opr file_op_obj;
+    Node* head;
+    Emp_cred_ver ver_obj;
+    int result_of_data_found;
+    Employee login_obj;
     
-    read_data_from_user(disp_ptr);
+    cout<<"welcome to display\n"<<flush;
+    head=file_op_obj.read_complete_data("database.txt",MODE_READ);
+    
     //user_choice();
 
     return;
