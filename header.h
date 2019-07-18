@@ -61,7 +61,7 @@ class Employee
 class Node:public Employee
 {
     public:
-       char* email;
+     //  char* email;
        Node* next;
 };
 
@@ -81,7 +81,7 @@ class File_opr:public Employee
         int is_found;
 
         int file_open(Employee*,const char *,int,fstream*);
-        int read_complete_data(const char*,int);
+        Node* read_complete_data(const char*,int);
         int write_to_file(Employee*,const char*,int);
 };
 

@@ -66,7 +66,7 @@ int File_opr::write_to_file(Employee* Employee_data,const char* filename,int MOD
     return SUCCESS;
 }
 
-int File_opr::read_complete_data(const char *filename,int MODE)
+Node* File_opr::read_complete_data(const char *filename,int MODE)
 {
     fstream my_file;
     
@@ -91,7 +91,7 @@ int File_opr::read_complete_data(const char *filename,int MODE)
         {
             while(getline(my_file,line))
             {
-                token=strtok(&line[0]+1,&delim);
+                token=strtok(&line[1],&delim);
                 link_obj.create_list(&head,token);
             }
         }
@@ -104,7 +104,7 @@ int File_opr::read_complete_data(const char *filename,int MODE)
     my_file.close();
     link_obj.display_data_linked_list(&head);
     
-    return SUCCESS;
+    return head;
 }
 
 Node* linked_list::create_list(Node **head,char *str)
@@ -131,6 +131,7 @@ Node* linked_list::create_list(Node **head,char *str)
             pointer=pointer->next;
         }
         pointer->next=new_node;
+        //cout<<(pointer)->email<<endl;
     }
 
     return (*head);

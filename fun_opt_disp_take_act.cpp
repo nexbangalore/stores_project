@@ -95,6 +95,9 @@ void Employee::register_new_user(Employee* regt_ptr){
 
     // object for performing file operations
     File_opr file_op_obj;
+    Node* head;
+    Emp_cred_ver ver_obj;
+    int result_of_data_found;
 
     // filename
     file_op_obj.filename="database.txt";
@@ -105,10 +108,27 @@ void Employee::register_new_user(Employee* regt_ptr){
     // for reading credentials
     read_data_from_user(regt_ptr);
 
-    // step 1
-    file_op_obj.write_to_file(regt_ptr,file_op_obj.filename,MODE_APPEND); 
-    //step 2
-    file_op_obj.read_complete_data(file_op_obj.filename,MODE_READ);
+    //fetching the head after reading all the data from database
+    head=file_op_obj.read_complete_data(file_op_obj.filename,MODE_READ);
+    
+    //if(head==NULL)
+    //{
+    //    cout<<"no data present in file to read"<<endl;
+    //}
+
+    result_of_data_found=ver_obj.parse_data_link_list(regt_ptr,head);
+
+    if(result_of_data_found == MATCH_FOUND)
+    {
+       cout<<"credentials already exists please enter new credentials"<<endl;
+       file_op_obj.register_new_user(regt_ptr);
+    }
+    
+    if(result_of_data_found == MATCH_NOT_FOUND)
+    {
+       cout<<"data does not exists added to database"<<endl;
+       file_op_obj.write_to_file(regt_ptr,file_op_obj.filename,MODE_APPEND); 
+    }
 
     return;
 }
