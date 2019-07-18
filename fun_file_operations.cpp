@@ -24,7 +24,7 @@ int File_opr::file_open(Employee* member,const char* filename,int mode,fstream* 
         (*my_file).open(filename,TRUNC);
     }
 
-    return 0;
+    return SUCCESS;
 }
 
 int File_opr::write_to_file(Employee* Employee_data,const char* filename,int MODE)
@@ -57,13 +57,13 @@ int File_opr::write_to_file(Employee* Employee_data,const char* filename,int MOD
     }
     else
     {
-        cout<<"file opening failed\n";
+        cout<<"file opening failed in write_to_file()"<<endl;
     }
 
     // closing the file
     my_file.close();
 
-    return 3;
+    return SUCCESS;
 }
 
 int File_opr::read_complete_data(const char *filename,int MODE)
@@ -96,10 +96,15 @@ int File_opr::read_complete_data(const char *filename,int MODE)
             }
         }
     }
+    else
+    {
+        cout<<"file opening failed in read_complete_data()"<<endl;
+    }
+
     my_file.close();
     link_obj.display_data_linked_list(&head);
     
-    return 1;
+    return SUCCESS;
 }
 
 Node* linked_list::create_list(Node **head,char *str)
@@ -110,7 +115,6 @@ Node* linked_list::create_list(Node **head,char *str)
     // storing the address of new node
     Node* new_node=new (Node);
     new_node->email=str;
-   // cout<<new_node->email<<endl;
     new_node->next=NULL;
 
     if((*head)==NULL)
@@ -134,7 +138,7 @@ Node* linked_list::create_list(Node **head,char *str)
 
 void linked_list::display_data_linked_list(Node** head)
 {
-    cout<<"printing the list"<<endl;
+    cout<<"printing the list from reading file function"<<endl;
     Node* pointer=(*head);
     while(pointer != NULL)
     {

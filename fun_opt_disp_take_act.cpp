@@ -109,6 +109,8 @@ void Employee::register_new_user(Employee* regt_ptr){
     file_op_obj.write_to_file(regt_ptr,file_op_obj.filename,MODE_APPEND); 
     //step 2
     file_op_obj.read_complete_data(file_op_obj.filename,MODE_READ);
+
+    return;
 }
 
 // generic read user data function

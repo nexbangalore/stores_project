@@ -10,6 +10,12 @@
 
 using namespace std;
 
+#define SUCCESS 1
+#define FAIL    0 
+
+#define MATCH_FOUND      1
+#define MATCH_NOT_FOUND  0
+
 #define EMAIL_SYM_OPEN  '<'
 #define EMAIL_SYM_CLOSE '>'
 #define DATA_SYM_OPEN   '{'
@@ -55,7 +61,7 @@ class Employee
 class Node:public Employee
 {
     public:
-//       string email;
+       char* email;
        Node* next;
 };
 
@@ -77,6 +83,14 @@ class File_opr:public Employee
         int file_open(Employee*,const char *,int,fstream*);
         int read_complete_data(const char*,int);
         int write_to_file(Employee*,const char*,int);
+};
+
+class Emp_cred_ver:public Node
+{
+    public:
+        int user_is_present(Employee*,Node *);
+        int result_of_strcmp(char*,char*);
+        int parse_data_link_list(Employee*,Node *);
 };
 
 // function prototypes
