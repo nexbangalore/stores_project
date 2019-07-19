@@ -63,7 +63,7 @@ void user_choice()
 
 void Employee::display_employee_details(Employee* disp_ptr){
     
-    //system("clear");
+    int ch;
     File_opr file_op_obj;
     Node* head;
     Emp_cred_ver ver_obj;
@@ -73,8 +73,11 @@ void Employee::display_employee_details(Employee* disp_ptr){
     cout<<"welcome to display\n"<<flush;
     head=file_op_obj.read_complete_data("database.txt",MODE_READ);
     
-    //user_choice();
-
+    cout<<"pless enter to continue..."<<endl;
+   
+    cin.ignore();
+    cin.get();
+    user_choice();
     return;
 }
 
@@ -115,8 +118,13 @@ void Employee::login_existing_user(Employee* login_ptr){
        cout<<"credentials are not present you cannot log in"<<endl;
        cout<<"please register yourself first"<<endl;
     }
-
+    
+    cout<<"pless enter to continue..."<<endl;
+    cin.ignore();
+    cin.get();
+    user_choice();
 }
+    
 
 void Employee::register_new_user(Employee* regt_ptr){
 
@@ -148,7 +156,9 @@ void Employee::register_new_user(Employee* regt_ptr){
        cout<<"data does not exists added to database"<<endl;
        file_op_obj.write_to_file(regt_ptr,file_op_obj.filename,MODE_APPEND); 
     }
-
+    cout<<"pless enter to continue..."<<endl;
+    cin.ignore();
+    cin.get();
     user_choice();
 
     return;
