@@ -38,16 +38,13 @@ int File_opr::write_to_file(Employee* Employee_data,const char* filename,int MOD
 
     if(my_file.is_open())
     {
-        // {data1,data2}
-        my_file<<DATA_SYM_OPEN;
         my_file<<(*Employee_data).username;
         my_file<<SEPARATOR;
         my_file<<(*Employee_data).password;
         my_file<<SEPARATOR;
         my_file<<(*Employee_data).email;
         my_file<<SEPARATOR;
-        my_file<<(*Employee_data).department;
-        my_file<<DATA_SYM_CLOSE<<endl;
+        my_file<<(*Employee_data).department<<"\n";
     }
     else
     {
@@ -76,8 +73,6 @@ Node* File_opr::read_complete_data(const char *filename,int MODE)
     // user defined
     read.file_open(NULL,filename,MODE,&my_file);
                                                            
-    //system("clear");
-
     // system defined
     if(my_file.is_open())
     {
@@ -86,7 +81,7 @@ Node* File_opr::read_complete_data(const char *filename,int MODE)
             while(getline(my_file,line))
             {
                 index=0;
-                brk_str[index]=strtok(&line[1],&delim);
+                brk_str[index]=strtok(&line[0],&delim);
                 while(brk_str[index] != NULL)
                 {
                     index++;
@@ -102,7 +97,6 @@ Node* File_opr::read_complete_data(const char *filename,int MODE)
     }
 
     my_file.close();
-    link_obj.display_data_linked_list(&head);
     
     return head;
 }
@@ -147,10 +141,10 @@ void linked_list::display_data_linked_list(Node** head)
     while(pointer != NULL)
     {
         cout<<"----------------------------"<<endl;
-        cout<<pointer->username<<endl;
-        cout<<pointer->password<<endl;
-        cout<<pointer->email<<endl;
-        cout<<pointer->department<<endl;
+        cout<<"username:     "<<pointer->username<<endl<<flush;
+        cout<<"password:     "<<pointer->password<<endl<<flush;
+        cout<<"email:        "<<pointer->email<<endl<<flush;
+        cout<<"department:   "<<pointer->department<<endl<<flush;
         cout<<"----------------------------"<<endl;
         
         pointer=pointer->next;

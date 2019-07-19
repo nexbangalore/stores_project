@@ -66,12 +66,14 @@ void Employee::display_employee_details(Employee* disp_ptr){
     int ch;
     File_opr file_op_obj;
     Node* head;
+    linked_list object_list;
     Emp_cred_ver ver_obj;
     int result_of_data_found;
     Employee login_obj;
     
     cout<<"welcome to display\n"<<flush;
     head=file_op_obj.read_complete_data("database.txt",MODE_READ);
+    object_list.display_data_linked_list(&head);
     
     cout<<"pless enter to continue..."<<endl;
    
