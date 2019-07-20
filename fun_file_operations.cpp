@@ -5,7 +5,7 @@ int File_opr::file_open(Employee* member,const char* filename,int mode,fstream* 
     // passing the file opening modes
     if(mode == MODE_APPEND)            // if(1 == 1)
     {
-        (*my_file).open(filename,OUTPUT | APPEND | READ);
+        (*my_file).open(filename,APPEND | WRITE);
     }
     else if(mode == MODE_OUTPUT)       // if(2 == 2)
     {
@@ -44,7 +44,7 @@ int File_opr::write_to_file(Employee* Employee_data,const char* filename,int MOD
         my_file<<SEPARATOR;
         my_file<<(*Employee_data).email;
         my_file<<SEPARATOR;
-        my_file<<(*Employee_data).department<<"\n";
+        my_file<<(*Employee_data).department<<endl;
     }
     else
     {

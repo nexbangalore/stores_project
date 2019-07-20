@@ -43,6 +43,9 @@ using namespace std;
 #define MODE_WRITE  4
 #define MODE_TRUNC  5
 
+// globally defined 
+int file_line_count;
+
 // basic class for performing employee operations
 class Employee
 {
@@ -98,3 +101,5 @@ class Emp_cred_ver:public Node
 int options_display();
 void exit();
 void read_data_from_user(Employee *);
+char* string_opr(Employee*,char *);
+int edit_database(Employee*,Employee*,char*);

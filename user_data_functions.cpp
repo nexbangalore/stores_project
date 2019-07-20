@@ -63,6 +63,7 @@ int Emp_cred_ver::parse_data_link_list(Employee* member,Node* head)
             }
             else
             {
+                ++file_line_count;
                 pointer=pointer->next;
             }
         }
@@ -72,6 +73,59 @@ int Emp_cred_ver::parse_data_link_list(Employee* member,Node* head)
     return MATCH_NOT_FOUND;
 }
 
+char* string_opr(Employee* data,char* dest_str)
+{
+    string sep=",";
+    char count=0;
+    for(count=0 ; count<50 ; count++)
+    {
+        dest_str[count]='\0';
+    }
 
+    strcat(dest_str,&(((*data).username)[0]));
+    strcat(dest_str,&(sep[0]));
+    strcat(dest_str,&(((*data).password)[0]));
+    strcat(dest_str,&(sep[0]));
+    strcat(dest_str,&(((*data).email)[0]));
+    strcat(dest_str,&(sep[0]));
+    strcat(dest_str,&(((*data).department)[0]));
+    cout<<"dest_string="<<dest_str;
 
+    return &(dest_str[0]);
+}
 
+int edit_database(Employee* data_to_find,Employee *data_to_replace,char *dest_str)
+{
+    ifstream seek1;
+    ofstream seek2;
+    string temp;
+    char* want_to_find;
+    string need_to_search;
+    char* data_to_edit_with;
+    string data_to_replace_with;
+    int pos;
+
+    want_to_find=string_opr(data_to_find,dest_str);
+    strcpy(&(need_to_search[0]),&(dest_str[0]));
+    data_to_edit_with=string_opr(data_to_replace,dest_str);
+    strcpy(&(data_to_edit_with[0]),&(dest_str[0]));
+
+    seek1.open("database.txt");
+    seek2.open("database.txt",APPEND|OUTPUT|READ|WRITE);
+
+    while(getline(seek1,temp))
+    {
+        while(true)
+        {
+            pos=temp.find(data_to_replace_with);
+            if(pos != string::npos)
+            {
+                temp.replace(temp.find(need_to_search),need_to_search.length(),data_to_replace_with);
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+}

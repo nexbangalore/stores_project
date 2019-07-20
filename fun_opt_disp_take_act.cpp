@@ -86,9 +86,32 @@ void Employee::display_employee_details(Employee* disp_ptr){
 void Employee::modify_employee_details(Employee* modify_ptr){
     
     //system("clear");
+    Node* head;
+    File_opr file_op_obj;
+    Emp_cred_ver ver_obj;
+    int result_of_data_found;
+    char new_data[50];
+    Employee modify_ptr_new;
+    
     cout<<"welcome to modify\n"<<flush;
     
     read_data_from_user(modify_ptr);
+    
+    head=file_op_obj.read_complete_data("database.txt",MODE_READ);
+    
+    result_of_data_found=ver_obj.parse_data_link_list(modify_ptr,head);
+    
+    if(result_of_data_found == MATCH_FOUND)
+    {
+       cout<<"result found in line no:"<<file_line_count<<endl;
+       cout<<"enter new details"<<endl;
+       read_data_from_user(&modify_ptr_new);
+       edit_database(modify_ptr,&modify_ptr_new,&(new_data[0]));
+    }
+    else
+    {
+        cout<<"data not present"<<endl;
+    }
     //user_choice();
     return;
 }
