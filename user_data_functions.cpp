@@ -89,7 +89,7 @@ char* string_opr(Employee* data,char* dest_str)
     strcat(dest_str,&(((*data).email)[0]));
     strcat(dest_str,&(sep[0]));
     strcat(dest_str,&(((*data).department)[0]));
-    cout<<"dest_string="<<dest_str;
+    //    cout<<"dest_string="<<dest_str;
 
     return &(dest_str[0]);
 }
@@ -97,35 +97,41 @@ char* string_opr(Employee* data,char* dest_str)
 int edit_database(Employee* data_to_find,Employee *data_to_replace,char *dest_str)
 {
     ifstream seek1;
-    ofstream seek2;
+    fstream seek2;
     string temp;
     char* want_to_find;
-    string need_to_search;
+    char need_to_search[40];
     char* data_to_edit_with;
-    string data_to_replace_with;
-    int pos;
+    char data_to_replace_with[40];
+    size_t pos;
+    int length;
+
+    memset(need_to_search,'\0',39);
+    memset(data_to_replace_with,'\0',39);
 
     want_to_find=string_opr(data_to_find,dest_str);
     strcpy(&(need_to_search[0]),&(dest_str[0]));
+    cout<<"need_to_search="<<need_to_search<<endl;
+
     data_to_edit_with=string_opr(data_to_replace,dest_str);
-    strcpy(&(data_to_edit_with[0]),&(dest_str[0]));
+    strcpy(&(data_to_replace_with[0]),&(dest_str[0]));
+    cout<<"data_to_edit_with="<<data_to_replace_with<<endl;
 
-    seek1.open("database.txt");
-    seek2.open("database.txt",APPEND|OUTPUT|READ|WRITE);
+    seek1.open("database.txt",WRITE);
+    length=strlen(&need_to_search[0]);
+    // seek2.open("database.txt",APPEND|OUTPUT|READ|WRITE);
 
-    while(getline(seek1,temp))
+    if(seek1.is_open())
     {
-        while(true)
+        while(getline(seek1,temp))
         {
-            pos=temp.find(data_to_replace_with);
+            pos=temp.find(need_to_search);
+            cout<<pos<<endl;
             if(pos != string::npos)
             {
-                temp.replace(temp.find(need_to_search),need_to_search.length(),data_to_replace_with);
-            }
-            else
-            {
-                break;
+                temp.replace(pos,length,data_to_replace_with);
             }
         }
     }
+    seek1.close();
 }
